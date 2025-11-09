@@ -1,4 +1,6 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+//using System.Web.Http; // this was automatically added when I introduced [Authorize]. should have been the above
 
 namespace WebApiForIntegrationTests.Controllers
 {
@@ -19,6 +21,7 @@ namespace WebApiForIntegrationTests.Controllers
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
+        [Authorize(Roles = "Admin")]
         public IEnumerable<WeatherForecast> Get()
         {
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
